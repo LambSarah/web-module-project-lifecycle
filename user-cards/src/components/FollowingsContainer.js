@@ -6,6 +6,7 @@ class FollowingsContainer extends React.Component {
     render() {
         return (
             <div>
+                <h5>Following:</h5>
                 <CardGroup>
                     {this.props.followings.map((following) => {
                         return (<FollowingCard key={following.id} following={following} />)

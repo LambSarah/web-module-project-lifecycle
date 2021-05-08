@@ -2,88 +2,30 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import MainUserCard from './components/MainUserCard.js'
-import CardsWrapper from './components/CardsWrapper.js'
+//import ContributionsGraph from './components/ContributionsGraph.js'
+//import CardsWrapper from './components/CardsWrapper.js'
 import FollowingsContainer from './components/FollowingsContainer'
+
 class App extends React.Component {
+  //set up state for app to hold user, an array of followers, an array of followings
   state = {
-    user: {
-      // id: '',
-      // username: '',
-      // avatarUrl: '',
-      // email: '',
-      // location: '',
-      // firstAndLastName: '',
-      // organization: '',
-      // publicRepos: 0,
-      // numfollowers: 0,
-      // followers: [],
-      // numfollowing: 0,
-      // following: []
-    },
-    followers: [
-      // {
-      //   follower: {
-      //     id: '',
-      //     username: '',
-      //     avatarUrl: '',
-      //     email: '',
-      //     location: '',
-      //     firstAndLastName: '',
-      //     organization: '',
-      //     publicRepos: 0,
-      //     numfollowers: 0,
-      //     followers: [],
-      //     numFollowing: 0,
-      //     following: []
-      //   }
-    ],
-    followings: [
-      // {
-      //   following: {
-      //     id: '',
-      //     username: '',
-      //     avatarUrl: '',
-      //     email: '',
-      //     location: '',
-      //     firstAndLastName: '',
-      //     organization: '',
-      //     publicRepos: 0,
-      //     numfollowers: 0,
-      //     followers: [],
-      //     numFollowing: 0,
-      //     following: []
-      //   }
-      // }
-    ]
+    user: {},
+    followers: [],
+    followings: []
   }
 
   componentDidMount() {
+    //after component mounts, get request sent for user's details
     axios.get('https://api.github.com/users/LambSarah')
       .then(res => {
-        console.log('initial call, waiting for promise', res.data.message)
+        //then the response data is set to user state
         this.setState({
           user: res.data,
-          // id: res.data.id,
-          // username: res.data.login,
-          // avatarUrl: res.data.avatar_url,
-          // email: res.data.email,
-          // location: res.data.location,
-          // firstAndLastName: res.data.name,
-          // organization: res.data.company,
-          // publicRepos: res.data.public_repos,
-          // numfollowers: res.data.followers,
-          // followers: res.data.followers_url,
-          // numfollowing: res.data.following,
-          // followings: axios.get(res.data.following_url).then(response => console.log(response)),
-          // followers: axios.get(res.data.followers_url)
-
-        }
-
-        )
-        console.log('CDM called, profile,after promise is fullfilled:', res.data)
+        })
       })
-
+      //then another get request sent for the list of following
       .then(axios.get('https://api.github.com/users/LambSarah/following')
+        //then that response is used to make multiple get requests and those are mapped to followings state array
         .then(response => {
           let followings = response.data;
           followings.forEach((following) => {
@@ -94,42 +36,22 @@ class App extends React.Component {
                   followings: [...prevState.followings, newFollowing]
                 }))
               })
-
-            // this.setState({ followings: { following: [response.data] } })
-            //let newCard = cardMaker(followerData);
-            // cardsDiv.appendChild(newCard);
           })
-          //   .then(axios.get({this.state.avatarUrl).then(res => console.log(response))
         })
         .catch(error => console.log(error))
-
       )
   }
 
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('CDU called:', prevProps, prevState);
-    // console.log('current state/props:', this.props, this.state)
-    // if (prevState.user.username !== this.state.username) {
-    //   axios.get('https://api/github.com/users/' + this.state.user.username)
-    //     .then(res => {
-    //       this.setState({
-    //         data: res.data,
-    //         user: {
-    //           username: res.data.login,
-    //           email: res.data.email,
-    //           location: res.data.location,
-    //           firstAndLastName: res.data.name,
-    //           organization: res.data.company,
-    //           publicRepos: res.data.public_repos,
-    //           followers: res.data.followers,
-    //           following: res.data.following,
-    //         }
-    //       })
-    //     })
-    // } else {
-    //   return
-    // }
+    if (prevState.user.username !== this.state.username) {
+      axios.get('https://api/github.com/users/' + this.state.user.username)
+        .then(res => {
+          this.setState({
+            user: res.data
+          })
+        })
+    }
 
   }
   render() {

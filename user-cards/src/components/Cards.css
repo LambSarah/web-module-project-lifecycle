@@ -6,3 +6,28 @@
 .title{
     font-size:6rem;
 }
+
+h5{
+    text-align:center;
+    background-color:aqua;
+}
+
+.fluid{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+}
+
+Card{
+    display:inline-block;
+}
+
+h3{
+    text-align:center;
+}
+
+.graph{
+    padding:40px, 10px;
+    margin:40px, auto;
+}
