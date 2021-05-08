@@ -2,10 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import MainUserCard from './components/MainUserCard.js'
-//import ContributionsGraph from './components/ContributionsGraph.js'
-//import CardsWrapper from './components/CardsWrapper.js'
 import FollowingsContainer from './components/FollowingsContainer'
-
+import FollowersContainer from './components/FollowersContainer'
 class App extends React.Component {
   //set up state for app to hold user, an array of followers, an array of followings
   state = {
@@ -59,7 +57,7 @@ class App extends React.Component {
       <>
         <div>
           <MainUserCard user={this.state.user} />
-
+          <FollowersContainer followers={this.state.followers} />
           <FollowingsContainer followings={this.state.followings} />
         </div>
 

@@ -12,10 +12,10 @@ class MainUserCard extends React.Component {
                             <Card>
                                 <CardImg top width='318' height='290' src={this.props.user.avatar_url} alt='user card image' />
                                 <CardBody>
-                                    <CardTitle className='title' tag='h1'>{this.props.user.name}</CardTitle>
+                                    <CardTitle className='title' id='mainUserName' tag='h1'>{this.props.user.name}</CardTitle>
                                     <CardTitle className='title-username' tag='h4'>{this.props.user.login}</CardTitle>
                                     <CardText className='details'>
-                                        <small className='text-muted'>{this.props.user.company}</small>
+                                        <small className='text-muted'>{this.props.user.company}</small><br />
                                         Location: {this.props.user.location} <br />
                                         Profile:
                                                 <a href={this.props.user.url}>

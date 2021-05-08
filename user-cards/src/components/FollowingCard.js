@@ -6,8 +6,9 @@ class FollowingCard extends React.Component {
         return (
             <Card inverse>
                 <CardImg src={this.props.following.avatar_url} alt='follower image' />
-                <CardImgOverlay>
+                <CardImgOverlay className='overlay'>
                     <CardTitle>{this.props.following.name}</CardTitle>
+                    <CardText>@{this.props.following.login}</CardText>
                 </CardImgOverlay>
 
 
