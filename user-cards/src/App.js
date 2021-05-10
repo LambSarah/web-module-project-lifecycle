@@ -4,13 +4,12 @@ import './App.css';
 import MainUserCard from './components/MainUserCard.js'
 import FollowingsContainer from './components/FollowingsContainer'
 import FollowersContainer from './components/FollowersContainer'
-//import SearchForm from './components/SearchForm.js'
-import FormWrapper from './components/FormWrapper'
 import NavBar from './components/NavBar.js'
-import BASE_URL from './components/BASE_URL.js'
+
 
 class App extends React.Component {
   //set up state for app to hold user, an array of followers, an array of followings
+  // and state for search
   state = {
     user: {},
     followers: [],
@@ -44,6 +43,10 @@ class App extends React.Component {
               })
           })
         })
+        //****** This is the same as above but for followers. Because i don't have
+        // any followers, this had to be commented out, it kept breaking my app */
+
+
         /*  .then(axios.get('https://api.github.com/users/LambSarah/followers'))
          .then(resp => {
            if (resp !== null) {
@@ -64,6 +67,7 @@ class App extends React.Component {
            }
          }
          )) */
+        //Catch any errors from api calls
         .catch(error => {
           console.log('Api call failed due to ', error.message);
           throw new Error('The API call was unsuccessful, because ', error.message);
@@ -72,15 +76,20 @@ class App extends React.Component {
 
         ))
   }
+
+  // handle click on followers' card
   handleClick = (e, login) => {
     let newClick = e.target.value;
     console.log(newClick)
   }
 
+  // updates the placeholder of search input to search option chosen
+  // only updates if user hasn't typed anything in search input yet
   changeSearchPlaceholder = e => {
     this.setState({ searchPlaceholder: e.target.value })
   }
 
+  //changes the search query to chosen search option
   changeSearchSyntax = (e) => {
     let searchParam = e.target.value;
     this.changeSearchPlaceholder(e);
@@ -98,26 +107,26 @@ class App extends React.Component {
     }
   }
 
+  //handles changes in search input
   changeSearchText = e => {
     const newSearchText = e.target.value;
     this.setState({ searchText: newSearchText });
   }
 
+  //onClick handler for search form
   searchApi = (e) => {
     e.preventDefault();
-    axios.get(`${BASE_URL}/${this.state.searchSyntax}`)
-      // axios.get(`https://api.github.com/search/users?q=${this.state.searchText}`)
+    console.log('sending request:', this.state.searchSyntax)
+    axios.get('https://api.github.com/' + this.state.searchSyntax)
       .then(response => console.log('api response:', response))
       .catch(error => console.log('search error:', error))
   }
 
 
   componentDidUpdate() {
-    if (this.state.searchText !== null) {
-      console.log('search query:', this.state.searchSyntax);
-    }
-    let update = this.searchApi;
-    return update;
+    // if (this.state.searchText !== null) {
+    //   console.log('search query:', this.state.searchSyntax);
+    // }
 
   }
   //"user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}"
