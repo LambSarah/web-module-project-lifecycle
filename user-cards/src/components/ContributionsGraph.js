@@ -4,7 +4,7 @@ class ContributionsGraph extends React.Component {
         return (
             <>
                 <div className='graph'>
-                    <h3>Contributions to GitHub Repositories</h3>
+                    <h3 className='title-username'>Contributions to GitHub Repositories</h3>
                     <h3>
                         <img src={`http://ghchart.rshah.org/${this.props.user.login}`} width='700' height='300' alt='Github Contributions' />
                     </h3>
