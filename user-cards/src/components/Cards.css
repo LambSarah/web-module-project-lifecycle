@@ -1,0 +1,45 @@
+.title-username{
+    font-style:italic;
+    font-size: 2rem;
+    color:red;
+font-size:1.25rem;
+font-family: 'Rock Salt', cursive;
+}
+.title, #followersTitle, #followingTitle{    
+    font-family: 'Black Ops One', cursive;
+}
+
+#mainUserName{
+    font-size:6rem;
+}
+h5{
+    text-align:center;
+    background-color:black;
+    color:white;
+}
+
+.fluid{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+}
+
+Card{
+    display:inline-block;
+}
+
+h3{
+    text-align:center;
+}
+
+.graph{
+    padding:40px, 10px;
+    margin:40px, auto;
+}
+.overlay{
+    color:red;
+text-align:center;
+font-size:1.25rem;
+font-family: 'Rock Salt', cursive;
+}
